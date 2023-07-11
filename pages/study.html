@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>首页</h1>
+<form action="/add" method="post">
+    <input name="study" placeholder="添加学习课程">
+    <input type="submit">
+</form>
+<p>学习 FastAPI</p>
+{% for study in studys %}
+<p> {{study}}</p>
+{% endfor %}
+</body>
+</html>
