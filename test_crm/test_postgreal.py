@@ -1,19 +1,19 @@
-import mysql.connector
-from mysql.connector import Error
+import psycopg2
+from psycopg2 import Error
 
-# pip install mysql-connector-python
+# pip install psycopg2
 def init():
     try:
-        connection = mysql.connector.connect(
+        connection = psycopg2.connect(
             host='localhost',
             database='your_database',
             user='your_username',
             password='your_password'
         )
-        if connection.is_connected():
-            print('Connected to MySQL database')
+        if connection:
+            print('Connected to PostgreSQL database')
     except Error as e:
-        print(f'Error connecting to MySQL database: {e}')
+        print(f'Error connecting to PostgreSQL database: {e}')
 
 
 # Create a new record
