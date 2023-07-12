@@ -9,7 +9,21 @@ from fastapi.responses import JSONResponse, HTMLResponse,FileResponse
 
 app = FastAPI()
 
+
+#  pip install fastapi[all]  全部包 包括文档
 # uvicorn main:app --reload
+
+# docs  文档地址一
+# redoc   文档地址二
+
+# 启动方法 1
+# if __name__ == '__main__':
+#     uvicorn.run(app)
+
+# 启动方法2
+# 命令  uvicorn 类名:app对象名      例如: uvicorn main:app
+#   --reload   热部署
+
 @app.get("/pic")
 def user():
     """FileResponse定义响应"""
@@ -81,18 +95,8 @@ def read_root():
     return ["a", "b", "c"]
 
 
-# docs  文档地址一
 
-# redoc   文档地址二
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
-
-# 启动方法 1
-# if __name__ == '__main__':
-#     uvicorn.run(app)
-
-# 启动方法2
-# 命令  uvicorn 类名:app对象名      例如: uvicorn main:app
-#   --reload   热部署
