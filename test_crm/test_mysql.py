@@ -2,25 +2,33 @@ import mysql.connector
 from mysql.connector import Error
 
 # pip install mysql-connector-python
-def init():
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',
-            database='your_database',
-            user='your_username',
-            password='your_password'
-        )
-        if connection.is_connected():
-            print('Connected to MySQL database')
-    except Error as e:
-        print(f'Error connecting to MySQL database: {e}')
+
+
+connection = mysql.connector.connect(
+    host='localhost',
+    database='mydata',
+    user='root',
+    password='root'
+)
+if connection.is_connected():
+    print('Connected to MySQL database')
 
 
 # Create a new record
-def create_record(connection, query, record_data):
+def create_record(query):
     try:
         cursor = connection.cursor()
-        cursor.execute(query, record_data)
+        cursor.execute(query)
+        connection.commit()
+        print('Record created successfully')
+    except Error as e:
+        print(f'Error creating record: {e}')
+
+
+def insert_record(query, data):
+    try:
+        cursor = connection.cursor()
+        cursor.execute(query, data)
         connection.commit()
         print('Record created successfully')
     except Error as e:
@@ -28,7 +36,7 @@ def create_record(connection, query, record_data):
 
 
 # Read records
-def read_records(connection, query):
+def read_records(query):
     try:
         cursor = connection.cursor()
         cursor.execute(query)
@@ -40,7 +48,7 @@ def read_records(connection, query):
 
 
 # Update a record
-def update_record(connection, query, record_data):
+def update_record(query, record_data):
     try:
         cursor = connection.cursor()
         cursor.execute(query, record_data)
@@ -51,7 +59,7 @@ def update_record(connection, query, record_data):
 
 
 # Delete a record
-def delete_record(connection, query):
+def delete_record(query):
     try:
         cursor = connection.cursor()
         cursor.execute(query)
@@ -62,4 +70,20 @@ def delete_record(connection, query):
 
 
 if __name__ == '__main__':
-    init()
+
+# query = """
+# CREATE TABLE IF NOT EXISTS users (
+#     id INT PRIMARY KEY AUTO_INCREMENT,
+#     name VARCHAR(255) NOT NULL,
+#     email VARCHAR(255) NOT NULL
+# )
+# """
+# create_record(query)
+
+# query = "INSERT INTO users ( name, email) VALUES ( %s, %s)"
+# record_data = ("John Doe", "johndoe@example.com")
+# update_record(query,record_data)
+
+# read_records("select * from users")
+
+# delete_record("delete from users where id = 1")

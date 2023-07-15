@@ -9,12 +9,12 @@ from test_crm.test_sqlmodel import create_user,select_user,update_user,del_user,
 app = FastAPI()
 template = Jinja2Templates("pages")
 # 数据库绑定
-# register_tortoise(app,
-#                   db_url="mysql://root:123456@localhost:3306/fastapi",
-#                   modules={"models":[]},
-#                   add_exception_handlers=True,
-#                   generate_schemas=True
-#                   )
+register_tortoise(app,
+                  db_url="mysql://root:123456@localhost:3306/fastapi",
+                  modules={"models":[]},
+                  add_exception_handlers=True,
+                  generate_schemas=True
+                  )
 
 
 # uvicorn orm:app --reload
