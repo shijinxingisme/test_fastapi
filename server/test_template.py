@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 
 app = FastAPI()
-template = Jinja2Templates("pages")
+template = Jinja2Templates("../pages")
 
 
 # uvicorn template:app --reload

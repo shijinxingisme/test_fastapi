@@ -1,7 +1,7 @@
 from tortoise import Model, fields
 
 
-class Todo(Model):
+class Study(Model):
     """数据库中的表 todo """
     id = fields.IntField(pk=True)
     content = fields.CharField(max_length=500)
