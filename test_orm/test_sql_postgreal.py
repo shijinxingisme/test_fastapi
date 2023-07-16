@@ -2,33 +2,29 @@ import psycopg2
 from psycopg2 import Error
 
 # pip install psycopg2
-def init():
-    try:
-        connection = psycopg2.connect(
-            host='localhost',
-            database='your_database',
-            user='your_username',
-            password='your_password'
-        )
-        if connection:
-            print('Connected to PostgreSQL database')
-    except Error as e:
-        print(f'Error connecting to PostgreSQL database: {e}')
 
 
-# Create a new record
-def create_record(connection, query, record_data):
+connection = psycopg2.connect(
+    host='localhost',
+    database='mytest',
+    user='postgres',
+    password='root'
+)
+if connection:
+    print('Connected to PostgreSQL database')
+
+
+def create_table(query):
     try:
         cursor = connection.cursor()
-        cursor.execute(query, record_data)
+        cursor.execute(query)
         connection.commit()
         print('Record created successfully')
     except Error as e:
         print(f'Error creating record: {e}')
 
-
 # Read records
-def read_records(connection, query):
+def read_records(query):
     try:
         cursor = connection.cursor()
         cursor.execute(query)
@@ -40,7 +36,7 @@ def read_records(connection, query):
 
 
 # Update a record
-def update_record(connection, query, record_data):
+def insert_update_record(query, record_data):
     try:
         cursor = connection.cursor()
         cursor.execute(query, record_data)
@@ -51,7 +47,7 @@ def update_record(connection, query, record_data):
 
 
 # Delete a record
-def delete_record(connection, query):
+def delete_record(query):
     try:
         cursor = connection.cursor()
         cursor.execute(query)
@@ -62,4 +58,19 @@ def delete_record(connection, query):
 
 
 if __name__ == '__main__':
-    init()
+    # query ="""
+    #     CREATE TABLE users (
+    #         id SERIAL PRIMARY KEY,
+    #         name VARCHAR(255),
+    #         email VARCHAR(255)
+    #     )
+    # """
+    # create_table(query)
+
+    # query = "INSERT INTO users ( name, email) VALUES ( %s, %s)"
+    # record_data = ("John Doe", "johndoe@example.com")
+    # insert_update_record(query,record_data)
+
+    read_records("select * from users")
+
+    # delete_record("delete from users where id = 1")
